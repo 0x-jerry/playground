@@ -3,5 +3,12 @@
   "version": "0.0.1",
   "repository": "https://github.com/cwxyz007/test-playground.git",
   "author": "Gem Xli <x.li.gem@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "fs-extra": "^9.0.1",
+    "pug": "^3.0.0"
+  }
 }
