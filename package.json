@@ -7,8 +7,14 @@
   "scripts": {
     "build": "node scripts/build.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn build"
+    }
+  },
   "devDependencies": {
     "fs-extra": "^9.0.1",
+    "husky": "^4.2.5",
     "pug": "^3.0.0"
   }
 }
