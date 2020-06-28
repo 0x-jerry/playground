@@ -7,14 +7,8 @@
   "scripts": {
     "build": "node scripts/build.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn build && git add . && git commit -m 'chore: build'"
-    }
-  },
   "devDependencies": {
     "fs-extra": "^9.0.1",
-    "husky": "^4.2.5",
     "pug": "^3.0.0"
   }
 }
