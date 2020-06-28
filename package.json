@@ -5,10 +5,14 @@
   "author": "Gem Xli <x.li.gem@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "dev": "serve ."
   },
   "devDependencies": {
     "fs-extra": "^9.0.1",
     "pug": "^3.0.0"
+  },
+  "dependencies": {
+    "serve": "^11.3.2"
   }
 }

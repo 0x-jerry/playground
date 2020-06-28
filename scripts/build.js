@@ -27,7 +27,7 @@ async function start() {
 
     data.links.push({
       name: file,
-      url: `./src/${file}`
+      url: `./src/${file}/`
     })
   })
 

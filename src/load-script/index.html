@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态 Script 加载</title>
+  </head>
+  <body>
+    <p>本页面测试 创建 script 标签的方式</p>
+    <p>几种加载方式</p>
+
+    <ul>
+      <li>
+        <a href="./innerHtml.html">inner html</a>
+      </li>
+      <li>
+        <a href="./write.html">document.write</a>
+      </li>
+      <li>
+        <a href="./import.html">
+          import
+        </a>
+      </li>
+    </ul>
+    <script>
+      const el2 = document.createElement('script')
+      el2.async = false
+      el2.src = './lib.v2.js'
+      document.body.appendChild(el2)
+
+      const el = document.createElement('script')
+      el.src = './lib.v1.js'
+      document.body.appendChild(el)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document.Write</title>
+  </head>
+  <body>
+    <div id="app">1</div>
+    <script>
+      setTimeout(() => {
+        const el = document.getElementById('app')
+        el && (el.innerHTML = 2)
+      }, 1000)
+
+      // case 1
+
+      // window.onload = () => {
+      //   document.write('<script src="./lib.v3.js"><\/script>')
+      // }
+
+      // case 2
+      document.write('<script src="./lib.v3.js"><\/script>')
+    </script>
+  </body>
+</html>
