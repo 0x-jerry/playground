@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义标签</title>
+  </head>
+  <body>
+    <c-count id="app" data-text="0"> </c-count>
+    <script>
+      class CCount extends HTMLElement {
+        constructor() {
+          super()
+          const shadow = this.attachShadow({ mode: 'open' })
+
+          const info = document.createElement('span')
+          this.info = info
+          info.setAttribute('class', 'info')
+
+          const text = this.getAttribute('data-text')
+          info.textContent = text
+
+          shadow.appendChild(info)
+        }
+
+        // 这里返回了的属性才会触发 attributeChangedCallback 事件
+        static get observedAttributes() {
+          return ['data-text']
+        }
+
+        attributeChangedCallback(name, oldVal, newVal) {
+          console.log('attr changed:', name, oldVal, newVal)
+          this.info.innerText = newVal
+        }
+      }
+      customElements.define('c-count', CCount)
+
+      window.onload = () => {
+        const el = document.getElementById('app')
+        let count = 1
+        setInterval(() => {
+          el.setAttribute('data-text', count++)
+          el.setAttribute('data-other', count)
+        }, 1000)
+      }
+    </script>
+  </body>
+</html>
