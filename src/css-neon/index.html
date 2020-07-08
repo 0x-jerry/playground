@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet/less" type="text/css" href="./style.less" />
+    <title>CSS Neon</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="neon">Neon <span class="neon-item neon-red">T</span>ext</h1>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js"></script>
+    <script>
+      window.onload = () => {
+        const $ = document
+
+        const items = $.getElementsByClassName('neon-item')
+
+        const flushName = 'neon-red'
+
+        class TimeLine {
+          constructor(opt) {
+            this.gap = opt.gap
+            this.timeline = opt.timeline
+            this.currentTime = -1
+            this.currentGapIdx = 0
+
+            this.loop = this.loop.bind(this)
+          }
+
+          loop(time) {
+            const idx = Math.random() * this.timeline.length
+            const curGap = this.timeline[~~idx]
+
+            if (time - this.currentTime > curGap * 1000) {
+              this.blink()
+              this.currentTime = time
+            }
+
+            requestAnimationFrame(this.loop)
+          }
+
+          start() {
+            requestAnimationFrame(this.loop)
+          }
+
+          blink() {
+            for (const item of items) {
+              item.classList.add(flushName)
+            }
+
+            const fact = 1 + Math.random() * 1
+
+            setTimeout(() => {
+              for (const item of items) {
+                item.classList.remove(flushName)
+              }
+            }, this.gap * 1000 * fact)
+          }
+        }
+
+        new TimeLine({ gap: 0.5, timeline: [1, 1.2, 1.3, 1.5] }).start()
+      }
+    </script>
+  </body>
+</html>
