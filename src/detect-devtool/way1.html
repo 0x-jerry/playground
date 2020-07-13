@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detect Dev Tools</title>
+  </head>
+  <body>
+    <div id="app">dev tool opened: <span id="status"> false </span></div>
+    <script>
+      function devtoolOpened() {
+        return new Promise((resolve) => {
+          const $el = document.createElement('div')
+          Object.defineProperty($el, 'className', {
+            get() {
+              setTimeout(() => console.clear(), 0)
+              resolve()
+              return '__detect_dev_tool'
+            }
+          })
+          console.log($el)
+        })
+      }
+
+      devtoolOpened().then(() => {
+        const $status = document.getElementById('status')
+        $status.innerText = true
+      })
+    </script>
+  </body>
+</html>
