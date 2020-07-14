@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "serve ."
+    "dev": "serve .",
+    "asbuild": "asc src/web-assembly/wasm/hello.ts -b src/web-assembly/wasm/hello.wasm -t src/web-assembly/wasm/hello.wat"
   },
   "devDependencies": {
+    "assemblyscript": "^0.13.7",
     "fs-extra": "^9.0.1",
     "pug": "^3.0.0"
   },
