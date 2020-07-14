@@ -22,7 +22,7 @@ export const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
 }
 
 const runWasmAdd = async () => {
-  const wasmModule = await wasmBrowserInstantiate('./hello.wasm')
+  const wasmModule = await wasmBrowserInstantiate('./wasm/hello.wasm')
 
   console.log(wasmModule)
 
