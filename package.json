@@ -10,7 +10,7 @@
     "asbuild": "asc src/web-assembly/wasm/hello.ts -b src/web-assembly/wasm/hello.wasm -t src/web-assembly/wasm/hello.wat"
   },
   "devDependencies": {
-    "assemblyscript": "^0.13.7",
+    "assemblyscript": "^0.14.3",
     "fs-extra": "^9.0.1",
     "pug": "^3.0.0"
   },
