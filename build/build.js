@@ -3,15 +3,16 @@ const path = require('path')
 const pug = require('pug')
 
 const r = (...args) => path.join(__dirname, '..', ...args)
+const htmlFolderName = 'html'
 
 const config = {
-  tplPath: r('src/index.pug')
+  tplPath: r(`${htmlFolderName}/index.pug`)
 }
 
 start()
 
 async function start() {
-  const dirPath = r('src')
+  const dirPath = r(htmlFolderName)
   const files = await fs.readdir(dirPath)
 
   const data = {
@@ -27,7 +28,7 @@ async function start() {
 
     data.links.push({
       name: file,
-      url: `./src/${file}/`
+      url: `./${htmlFolderName}/${file}/`
     })
   })
 

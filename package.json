@@ -5,9 +5,9 @@
   "author": "Gem Xli <x.li.gem@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node build/build.js",
     "dev": "serve .",
-    "asbuild": "asc src/web-assembly/wasm/hello.ts -b src/web-assembly/wasm/hello.wasm -t src/web-assembly/wasm/hello.wat"
+    "asbuild": "asc html/web-assembly/wasm/hello.ts -b html/web-assembly/wasm/hello.wasm -t html/web-assembly/wasm/hello.wat"
   },
   "devDependencies": {
     "assemblyscript": "^0.14.3",
