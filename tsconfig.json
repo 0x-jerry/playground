@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "allowJs": true,
+    "lib": ["DOM", "ESNext"]
+  },
+  "include": ["html"],
+  "exclude": ["html/web-assembly", "html/**/*.js"]
+}
