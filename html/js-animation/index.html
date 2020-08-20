@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .slider {
+        width: 600px;
+        height: 400px;
+        overflow: hidden;
+        perspective: calc(600px * 4 + 10px * 3);
+        perspective-origin: center;
+        border: 1px solid rgb(173, 238, 68);
+      }
+
+      .slider-box {
+        width: calc(600px * 4 + 10px * 3);
+        display: flex;
+        position: relative;
+        left: 0;
+      }
+
+      .slider-slot {
+        width: 600px;
+        height: 400px;
+        background: rgb(0, 140, 255);
+      }
+
+      .slider-slot.blue {
+        background: rgb(0, 140, 255);
+      }
+      .slider-slot.green {
+        background: rgb(102, 255, 0);
+      }
+      .slider-slot.red {
+        background: rgb(255, 38, 0);
+      }
+      .slider-slot.yellow {
+        background: rgb(255, 238, 0);
+      }
+
+      .slider-slot + .slider-slot {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="slider">
+        <div class="slider-box">
+          <div class="slider-slot blue"></div>
+          <div class="slider-slot yellow"></div>
+          <div class="slider-slot red"></div>
+          <div class="slider-slot green"></div>
+        </div>
+      </div>
+
+      <div>
+        <button onclick="changeSlider(0)">1</button>
+        <button onclick="changeSlider(1)">2</button>
+        <button onclick="changeSlider(2)">3</button>
+        <button onclick="changeSlider(3)">4</button>
+      </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script>
+      const sharedData = {
+        current: 0
+      }
+      function changeSlider(num) {
+        const isToLeft = num < sharedData.current
+        sharedData.current = num
+        const width = 600
+        const gap = 10
+
+        const left = width * num + gap * num
+        const el = anime({
+          targets: '.slider-box',
+          keyframes: [
+            {
+              rotateY: `${isToLeft ? '' : '-'}15deg`,
+              translateZ: -1000
+            },
+            { left: -left },
+            { rotateY: 0, translateZ: 0 }
+          ],
+          easing: 'easeInOutQuart'
+        })
+        el.play()
+        console.log(el, left)
+      }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101492756-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'UA-101492756-1')
+    </script>
+  </body>
+</html>
