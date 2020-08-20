@@ -22,7 +22,7 @@ async function start() {
   const p = files.map(async (file) => {
     const stat = await fs.stat(path.join(dirPath, file))
 
-    if (!stat.isDirectory()) {
+    if (!stat.isDirectory() || /^_/.test(file)) {
       return
     }
 

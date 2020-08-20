@@ -1,0 +1,79 @@
+.keyboard {
+  @unit: 50px;
+  @unit-gap: 2px;
+
+  .key-row {
+    display: flex;
+  }
+
+  .key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #eee;
+    margin: @unit-gap;
+    border-radius: 5px;
+
+    &.multi {
+      flex-direction: row;
+      &.vertical {
+        flex-direction: column;
+      }
+    }
+
+    &.half-key {
+      flex: 1;
+      margin: 0;
+    }
+  }
+
+  &.mac {
+    @height: @unit;
+    @width: @unit;
+
+    .key {
+      width: @width;
+      height: @height;
+      padding: 0 5px;
+
+      .half {
+        width: @width / 2;
+        height: @height;
+
+        &.vertical {
+          width: @width;
+          height: @height / 2;
+        }
+      }
+
+      &.back,
+      &.tab,
+      &.esc {
+        width: 1.5 * @width;
+      }
+
+      &.lock,
+      &.enter {
+        width: 2 * @width;
+      }
+
+      &.esc,
+      &.tab,
+      &.lock {
+        text-align: left;
+      }
+
+      &.back,
+      &.enter {
+        text-align: right;
+      }
+    }
+
+    .row-1 .key {
+      @height: @unit / 2;
+      height: @height;
+      line-height: @height;
+    }
+  }
+}

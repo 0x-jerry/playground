@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node build/build.js",
-    "dev": "serve .",
+    "serve": "serve .",
+    "dev": "yarn build && yarn serve",
     "asbuild": "asc html/web-assembly/wasm/hello.ts -b html/web-assembly/wasm/hello.wasm -t html/web-assembly/wasm/hello.wat",
     "build:ts": "tsc"
   },
