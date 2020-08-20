@@ -1,6 +1,8 @@
 .keyboard {
+  width: fit-content;
+  margin: auto;
   @unit: 50px;
-  @unit-gap: 2px;
+  @unit-gap: 4px;
 
   .key-row {
     display: flex;
@@ -10,10 +12,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 
-    background: #eee;
-    margin: @unit-gap;
+    margin: @unit-gap / 2;
     border-radius: 5px;
+    transition: 0.2s ease;
+    background: #eee;
+    color: black;
+
+    &:hover {
+      background: #aaa;
+      color: white;
+    }
+
+    &:active {
+      background: #888;
+      color: white;
+    }
 
     &.multi {
       flex-direction: row;
@@ -29,51 +44,63 @@
   }
 
   &.mac {
-    @height: @unit;
-    @width: @unit;
+    // Key count of each line: 14, 14, 14, 13, 12, 10
+    @esc-width-factor: 1.5;
+    @total-width: @unit * (13 + @esc-width-factor) + @unit-gap * (14 - 1);
+
+    .key-row {
+      width: @total-width;
+    }
 
     .key {
-      width: @width;
-      height: @height;
+      width: @unit;
+      height: @unit;
       padding: 0 5px;
 
       .half {
-        width: @width / 2;
-        height: @height;
+        width: @unit / 2;
+        height: @unit;
 
         &.vertical {
-          width: @width;
-          height: @height / 2;
+          width: @unit;
+          height: @unit / 2;
         }
       }
 
       &.back,
       &.tab,
       &.esc {
-        width: 1.5 * @width;
+        width: @esc-width-factor * @unit;
       }
 
       &.lock,
       &.enter {
-        width: 2 * @width;
+        @count: 13;
+        width: (@total-width - @unit * (@count - 2) - @unit-gap * (@count - 1)) / 2;
       }
 
-      &.esc,
-      &.tab,
-      &.lock {
-        text-align: left;
+      &.shift-left,
+      &.shift-right {
+        @count: 12;
+        width: (@total-width - @unit * (@count - 2) - @unit-gap * (@count - 1)) / 2;
       }
 
-      &.back,
-      &.enter {
-        text-align: right;
+      @space-width: 5 * @unit + 4 * @unit-gap;
+
+      &.space {
+        width: @space-width;
+      }
+
+      &.command-left,
+      &.command-right {
+        @count: 10;
+        width: (@total-width - @unit * (@count - 3) - @unit-gap * (@count - 1) - @space-width) / 2;
       }
     }
 
     .row-1 .key {
       @height: @unit / 2;
       height: @height;
-      line-height: @height;
     }
   }
 }
