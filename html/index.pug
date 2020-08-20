@@ -4,10 +4,12 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title 实验场地
+    link(rel="stylesheet", href="./public/index.css")
   body
-    ul.links
+    h1.title 测试
+    .links
       each link in links
-        li.link
+        button.link
           a(href=link.url)=link.name
 
   script(async, src="https://www.googletagmanager.com/gtag/js?id=UA-101492756-1")

@@ -1,0 +1,9 @@
+.links {
+  width: 80%;
+  margin: auto;
+}
+
+.link {
+  display: inline-block;
+  margin: 2px;
+}
