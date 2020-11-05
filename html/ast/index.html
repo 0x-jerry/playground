@@ -17,6 +17,7 @@
       gtag('config', 'UA-101492756-1')
     </script>
 
+    <div class="desc">用 Bison 生成的计算器，支持16进制（0xff）和2进制（o11）</div>
     <div id="app"></div>
 
     <script type="x/template"></script>
@@ -32,7 +33,7 @@
       const App = {
         data() {
           return {
-            input: '',
+            input: '(0x10 + o11) / (2^2 * 3!) * 10%',
             output: ''
           }
         },
@@ -47,9 +48,9 @@
         },
         template: `
     <div id="process">
-      <input v-model="input" />
-      <button @click="calc">result</button>
-      <pre>{{output}}</pre>
+      <input v-model="input" style='width:300px;' />
+      <button @click="calc">计算</button>
+      <pre>{{input}} = {{output}}</pre>
     </div>
     `
       }
