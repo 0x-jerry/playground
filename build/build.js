@@ -19,8 +19,8 @@ async function start() {
     links: []
   }
 
-  const p = files.map(async (file) => {
-    const stat = await fs.stat(path.join(dirPath, file))
+  files.forEach((file) => {
+    const stat = fs.statSync(path.join(dirPath, file))
 
     if (!stat.isDirectory() || /^_/.test(file)) {
       return
@@ -31,8 +31,6 @@ async function start() {
       url: `./${htmlFolderName}/${file}/`
     })
   })
-
-  await Promise.all(p)
 
   await compile(data)
 
