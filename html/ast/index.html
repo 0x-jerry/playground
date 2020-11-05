@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jison AST Test</title>
+  </head>
+  <body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101492756-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'UA-101492756-1')
+    </script>
+
+    <div id="app"></div>
+
+    <script type="x/template"></script>
+
+    <script src="./process.js"></script>
+    <script src="../_lib/vue.global.js"></script>
+    <script>
+      const { reactive } = Vue
+      const data = reactive({
+        input: ''
+      })
+
+      const App = {
+        data() {
+          return {
+            input: '',
+            output: ''
+          }
+        },
+        methods: {
+          calc() {
+            try {
+              this.output = process.parse(this.input)
+            } catch (error) {
+              this.output = error
+            }
+          }
+        },
+        template: `
+    <div id="process">
+      <input v-model="input" />
+      <button @click="calc">result</button>
+      <pre>{{output}}</pre>
+    </div>
+    `
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>
