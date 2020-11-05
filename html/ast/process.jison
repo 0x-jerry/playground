@@ -4,21 +4,23 @@
 %lex
 %%
 
-\s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b  return 'NUMBER'
-"*"                   return '*'
-"/"                   return '/'
-"-"                   return '-'
-"+"                   return '+'
-"^"                   return '^'
-"!"                   return '!'
-"%"                   return '%'
-"("                   return '('
-")"                   return ')'
-"PI"                  return 'PI'
-"E"                   return 'E'
-<<EOF>>               return 'EOF'
-.                     return 'INVALID'
+\s+                             /* skip whitespace */
+[0-9]+("."[0-9]+)?\b            return 'NUMBER'
+"0x"[0-9a-f]+("."[0-9a-f]+)?\b  return 'HEX'
+"o"[01]+\b                      return 'BINARAY'
+"*"                             return '*'
+"/"                             return '/'
+"-"                             return '-'
+"+"                             return '+'
+"^"                             return '^'
+"!"                             return '!'
+"%"                             return '%'
+"("                             return '('
+")"                             return ')'
+"PI"                            return 'PI'
+"E"                             return 'E'
+<<EOF>>                         return 'EOF'
+.                               return 'INVALID'
 
 /lex
 
@@ -64,6 +66,10 @@ e
         {$$ = $2;}
     | NUMBER
         {$$ = Number(yytext);}
+    | HEX
+        {$$ = parseInt(yytext.slice(2), 16);}
+    | BINARAY
+        {$$ = parseInt(yytext.slice(1), 2)}
     | E
         {$$ = Math.E;}
     | PI
