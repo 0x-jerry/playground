@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101492756-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'UA-101492756-1')
+    </script>
+
+    <script>
+      const MultiThread = ({ params = [], func, done } = {}, { max = 4 } = {}) => {
+        const conf = {
+          max,
+          idx: 0,
+          cancel: false,
+          errors: [],
+          done: [],
+          threads: []
+        }
+
+        async function Thread(opt) {
+          if (conf.idx >= params.length || conf.cancel) {
+            return
+          }
+
+          const idx = conf.idx++
+          const param = params[idx]
+
+          try {
+            const res = await func(param, opt)
+            conf.done.push({
+              idx,
+              res
+            })
+          } catch (error) {
+            conf.errors.push({
+              idx,
+              error
+            })
+          }
+
+          await Thread(opt)
+        }
+
+        return {
+          conf,
+          async start() {
+            for (let index = 0; index < conf.max; index++) {
+              conf.threads.push(
+                Thread({
+                  name: 'Thread:' + index
+                })
+              )
+            }
+
+            await Promise.all(conf.threads)
+            done && done(conf)
+          },
+          cancel() {
+            conf.cancel = true
+          }
+        }
+      }
+
+      console.time('test')
+
+      const multiThread = MultiThread({
+        params: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        func(param, opt) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log(opt.name, param)
+              if (Math.random() > 0.5) {
+                reject(opt.name + ' : ' + param)
+              } else {
+                resolve(opt.name + ' : ' + param)
+              }
+            }, Math.random() * 1000)
+          })
+        },
+        done(opt) {
+          console.log(opt)
+          console.timeEnd('test')
+        }
+      })
+
+      multiThread.start()
+
+      console.log(multiThread)
+    </script>
+  </body>
+</html>
