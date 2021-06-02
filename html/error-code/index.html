@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error Code</title>
+  </head>
+  <body>
+    <h2>看控制台</h2>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101492756-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'UA-101492756-1')
+    </script>
+    <script>
+      const codeMap = {
+        default: 'Unknown error!',
+        1: `[@user] 用户出错了！`,
+        2: `[@age] 未成年！`
+      }
+
+      function resolveErrorCodeMap(codeMap, defaultData) {
+        return function generate(code, data) {
+          const msg = codeMap[code] || codeMap.default
+
+          const d = data || defaultData
+          return msg.replace(/\[@.+\]/g, (g) => `[${d[g.slice(2, -1)] || 'unknown'}]`)
+        }
+      }
+
+      const d = {
+        user: 'user1',
+        age: 18
+      }
+
+      const g = resolveErrorCodeMap(codeMap, d)
+
+      console.log(g(1))
+      console.log(g(2, { age: 17 }))
+      console.log(g(3, d))
+
+      // ------------
+      const msgMap = {
+        1: `[${d.user}] 用户出错了！`,
+        2: `[${d.age}] 未成年！`
+      }
+
+      console.log(msgMap[1])
+      console.log(msgMap[2])
+      console.log(msgMap[3] || 'Unknown error!')
+
+      // 第一种有优势吗？
+      //
+    </script>
+  </body>
+</html>
