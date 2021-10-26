@@ -13,13 +13,13 @@
     "compile:ast": "jison html/ast/process.jison -o html/ast/process.js"
   },
   "devDependencies": {
-    "assemblyscript": "^0.14.3",
-    "fs-extra": "^9.0.1",
+    "assemblyscript": "^0.19.17",
+    "fs-extra": "^10.0.0",
     "jison": "^0.4.18",
-    "pug": "^3.0.0",
-    "typescript": "^4.0.1-rc"
+    "pug": "^3.0.2",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "serve": "^11.3.2"
+    "serve": "^12.0.1"
   }
 }
